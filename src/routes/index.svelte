@@ -5,7 +5,7 @@
 <script lang="ts">
 	import LineChart from '$lib/LineChart.svelte';
 	import GuageSvg from '$lib/GuageSVG.svelte';
-	// import Animetest from '$lib/Animetest.svelte';
+	import DataCard from '$lib/DataCard.svelte';
 	import { time } from '../stores/weather';
 	import { writable, type Writable } from 'svelte/store';
 	import {DateTime} from "luxon";
@@ -83,6 +83,7 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
+<DataCard/>
 <div class="gap-2 p-2 grid grid-cols-1 lg:grid-rows-2 lg:grid-cols-3 lg:gap-4 xl:grid-rows-1">
 	<div class="lg:col-span-2 lg:row-span-2 xl:row-span-1">
 		<LineChart id="firstChart" title="Temperature Difference" {datasets} />
