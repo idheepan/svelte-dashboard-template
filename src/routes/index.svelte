@@ -5,7 +5,7 @@
 <script lang="ts">
 	import LineChart from '$lib/LineChart.svelte';
 	import GuageSvg from '$lib/GuageSVG.svelte';
-	import Animetest from '$lib/Animetest.svelte';
+	// import Animetest from '$lib/Animetest.svelte';
 	import { time } from '../stores/weather';
 	import { readable, writable } from 'svelte/store';
 	import type { Writable } from 'svelte/store';
