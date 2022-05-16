@@ -1,67 +1,56 @@
 <script lang="ts">
+	import { writable, type Writable } from 'svelte/store';
 	import { onMount } from 'svelte';
-	import type { Writable } from 'svelte/store';
-	// library that creates chart objects in page
-	import Chart from 'chart.js/auto';
-	export let id = 'firstChart';
-	export let title: string;
-	export let ydataArray: Writable<{
-		labels: string[];
-		datasets: {
-			data: number[];
-			label: string;
-			borderColor: string;
-			tension?: number;
-			fill?: boolean;
-		}[];
-	}>;
-	// export let labels: Writable<Array<string>>;
 
-	const colors = ['#38bdf8', '#34d399', '#fb923c', '#f87171'];
-	var chart: Chart;
-	$: $ydataArray, updateChart();
-	//TODO: Initialize this function within onMount after just declaring it outside
-	function updateChart() {
-		if (typeof chart !== 'undefined') {
-			chart.data = $ydataArray;
-			chart.update();
-			console.log('chart updated');
-		} else {
+	import chartjs from 'chart.js/auto';
+	import type { DateTime } from 'luxon';
+	import 'chartjs-adapter-luxon';
+
+	export let id: string;
+	export let title: string;
+	export let datasets: Writable<
+		{
+			label: string;
+			backgroundColor: string;
+			borderColor: string;
+			data: { x: DateTime; y: number }[];
+		}[]
+	> = writable([]);
+	let ctx: CanvasRenderingContext2D;
+	let chartCanvas: HTMLCanvasElement;
+	let chart: Chart;
+
+	$: $datasets, update_chart();
+
+	function update_chart() {
+		if (typeof chart != 'undefined') {
+			console.log('Trying to update line chart');
+			chart.data.datasets = $datasets;
+			chart.update('none');
 		}
 	}
 
-	// init chart
 	onMount(async () => {
-		var config = {
+		ctx = chartCanvas.getContext('2d')!;
+
+		chart = new chartjs(ctx, {
 			type: 'line',
-			data: $ydataArray,
+			data: {
+				datasets: $datasets
+			},
 			options: {
-				maintainAspectRatio: false,
-				responsive: true,
-				title: {
-					display: true,
-					text: 'Sales Charts',
-					fontColor: 'white'
-				},
-				legend: {
-					labels: {
-						fontColor: 'white'
-					},
-					align: 'end',
-					position: 'bottom'
-				},
-				tooltips: {
-					mode: 'index',
-					intersect: false
-				},
-				hover: {
-					mode: 'nearest',
-					intersect: true
+				scales: {
+					x: {
+						type: 'time'
+					}
 				}
 			}
-		};
-		var ctx = (<HTMLCanvasElement>document.getElementById(id)!).getContext('2d')!;
-		chart = new Chart(ctx, config);
+		});
+		//TODO: We need to know the number of datasets on mount. Change it to one where it can be dynamic
+		chart.data.datasets?.forEach((dataset) => {
+			dataset.pointRadius = 0;
+			dataset.tension = 0.1;
+		});
 	});
 </script>
 
@@ -74,7 +63,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="relative m-2 flex h-64 lg:h-96">
-		<canvas {id} />
+	<div class="relative m-2 flex">
+		<canvas bind:this={chartCanvas} {id} />
 	</div>
 </section>
