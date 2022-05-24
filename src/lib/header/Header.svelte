@@ -1,52 +1,63 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import logo from './header_logo.svg';
+  import { page } from "$app/stores";
+  import logo from "./header_logo.svg";
+  //   import logo from "./logo-black.svg";
 </script>
 
 <header class="flex w-full bg-white text-stone-800">
-	<!-- <div class="absolute top-2 left-0">
+  <!-- <div class="absolute top-2 left-0">
 		<div class="space-y-2 rounded">
 			<span class="block h-1 w-4 animate-pulse bg-black" />
 			<span class="block h-1 w-4 animate-pulse bg-black" />
 			<span class="block h-1 w-4 animate-pulse bg-black" />
 		</div>
 	</div> -->
-	<div class="h-10 w-full sm:h-auto sm:transition-all">
-		<img class="m-auto h-16 bg-contain p-4" src={logo} alt="Canada Goose" />
-		<nav class="scale-0 sm:scale-100 sm:transition-all">
-			<ul
-				class="flex-column relative flex h-10 items-center justify-center bg-contain font-semibold"
-			>
-				<li class:active={$page.url.pathname === '/'}>
-					<div class="p-12">
-						<a sveltekit:prefetch href="/" class="hover:underline hover:underline-offset-4">LIVE</a>
-					</div>
-				</li>
-				<li class:active={$page.url.pathname === '/about'}>
-					<div class="p-12">
-						<a sveltekit:prefetch href="/about" class="hover:underline hover:underline-offset-4"
-							>ANALYSIS</a
-						>
-					</div>
-				</li>
-				<li class:active={$page.url.pathname === '/about'}>
-					<div class="p-12">
-						<a sveltekit:prefetch href="/about" class="hover:underline hover:underline-offset-4"
-							>ABOUT</a
-						>
-					</div>
-				</li>
-				<li class:active={$page.url.pathname === '/about'}>
-					<div class="p-12">
-						<a sveltekit:prefetch href="/about" class="hover:underline hover:underline-offset-4"
-							>TODO</a
-						>
-					</div>
-				</li>
-			</ul>
-		</nav>
-	</div>
-	<!-- 	
+  <div class="h-10 w-full sm:h-auto sm:transition-all">
+    <img class="m-auto h-12 bg-contain p-4" src={logo} alt="Canada Goose" />
+    <nav class="scale-0 sm:scale-100 sm:transition-all">
+      <ul
+        class="flex-column relative flex h-10 items-center justify-center bg-contain font-semibold"
+      >
+        <li class:active={$page.url.pathname === "/"}>
+          <div class="p-12">
+            <a
+              sveltekit:prefetch
+              href="/"
+              class="hover:underline hover:underline-offset-4">LIVE</a
+            >
+          </div>
+        </li>
+        <li class:active={$page.url.pathname === "/about"}>
+          <div class="p-12">
+            <a
+              sveltekit:prefetch
+              href="/about"
+              class="hover:underline hover:underline-offset-4">ANALYSIS</a
+            >
+          </div>
+        </li>
+        <li class:active={$page.url.pathname === "/about"}>
+          <div class="p-12">
+            <a
+              sveltekit:prefetch
+              href="/about"
+              class="hover:underline hover:underline-offset-4">ABOUT</a
+            >
+          </div>
+        </li>
+        <li class:active={$page.url.pathname === "/about"}>
+          <div class="p-12">
+            <a
+              sveltekit:prefetch
+              href="/about"
+              class="hover:underline hover:underline-offset-4">TODO</a
+            >
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <!-- 	
 	ul {
 		position: relative;
 		padding: 0;
@@ -65,7 +76,7 @@
 		height: 100%;
 	} -->
 
-	<!-- <div class="fixed top-0 left-0 flex w-full justify-center bg-white">
+  <!-- <div class="fixed top-0 left-0 flex w-full justify-center bg-white">
 		<img class="p-2" src={logo} alt="SvelteKit" />
 	</div> -->
 </header>
